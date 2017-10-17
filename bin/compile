@@ -21,5 +21,10 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'java_buildpack/buildpack'
 
 app_dir = ARGV[0]
+cache = ARGV[2]
+
+fileName = app_dir + '/java_buildpack_release.yml'
 
 JavaBuildpack::Buildpack.with_buildpack(app_dir, 'Compile failed with exception %s', &:compile)
+releaseOutput = JavaBuildpack::Buildpack.with_buildpack(app_dir, 'Compile failed in release with exception %s', &:release)
+File.open(fileName, 'w') { |file| file.write(releaseOutput) }
