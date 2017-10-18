@@ -21,7 +21,13 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'java_buildpack/buildpack'
 
 app_dir = ARGV[0]
+fileName = app_dir + '/java_buildpack_release.yml'
 
-File.open(app_dir + '/java_buildpack_release.yml').each do | line |
-  puts line
+if File.exist?(fileName)
+  File.open(fileName).each do | line |
+    puts line
+  end
+else 
+  output = JavaBuildpack::Buildpack.with_buildpack(app_dir, 'release failed in release with exception %s', &:release)
+  puts output
 end
