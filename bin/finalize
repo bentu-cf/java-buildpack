@@ -14,5 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require 'fileutils'
+
 $stdout.sync = true
 $stderr.sync = true
+app_dir = ARGV[0]
+dep = ARGV[2]
+index = ARGV[3]
+
+fileName = dep + '/' + index + '/java_buildpack_release.yml'
+FileUtils.cp(filename, app_dir)
