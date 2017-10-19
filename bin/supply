@@ -24,6 +24,7 @@ app_dir = ARGV[0]
 dep = ARGV[2]
 index = ARGV[3]
 
+app_dir = dep + '/' + index 
 fileName = dep + '/' + index + '/java_buildpack_release.yml'
 
 JavaBuildpack::Buildpack.with_buildpack(app_dir, 'Supply failed with exception %s', &:compile)
